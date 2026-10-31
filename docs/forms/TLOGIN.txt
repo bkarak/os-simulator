@@ -1,0 +1,96 @@
+object Login: TLogin
+  Left = 55
+  Top = 55
+  HelpContext = 13
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsToolWindow
+  Caption = 'Welcome To OS-Simulator'
+  ClientHeight = 348
+  ClientWidth = 524
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = True
+  Position = poScreenCenter
+  OnActivate = FormActivate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 16
+    Top = 48
+    Width = 136
+    Height = 12
+    Caption = 'Enter Login Here:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -17
+    Font.Name = 'Terminal Greek 737 (437G)'
+    Font.Style = []
+    ParentFont = False
+  end
+  object RadioGroup1: TRadioGroup
+    Left = 184
+    Top = 24
+    Width = 185
+    Height = 89
+    Hint = 'Choose a sheduler Here'
+    Caption = 'Choose Scheduler'
+    Items.Strings = ('Fifo' 'Round-Robin' 'Shortest Job First')
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 1
+    TabStop = True
+  end
+  object Edit1: TEdit
+    Left = 16
+    Top = 64
+    Width = 145
+    Height = 21
+    Hint = 'Enter Your Name Here'
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 0
+  end
+  object Memo1: TMemo
+    Left = 16
+    Top = 136
+    Width = 489
+    Height = 177
+    Hint = 'Status'
+    TabStop = False
+    Font.Charset = OEM_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Terminal Greek 737 (437G)'
+    Font.Style = []
+    ParentFont = False
+    ParentShowHint = False
+    ReadOnly = True
+    ShowHint = True
+    TabOrder = 3
+  end
+  object BitBtn1: TBitBtn
+    Left = 392
+    Top = 56
+    Width = 113
+    Height = 25
+    Hint = 'Enter The Simulation'
+    Caption = 'Start The Simulation'
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 2
+    OnClick = BitBtn1Click
+  end
+  object ProgressBar1: TProgressBar
+    Left = 16
+    Top = 320
+    Width = 489
+    Height = 16
+    Min = 0
+    Max = 9000
+    TabOrder = 4
+  end
+end

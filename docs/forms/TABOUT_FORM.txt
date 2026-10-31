@@ -1,0 +1,90 @@
+object About_Form: TAbout_Form
+  Left = 166
+  Top = 111
+  BorderIcons = []
+  BorderStyle = bsToolWindow
+  Caption = 'About...'
+  ClientHeight = 215
+  ClientWidth = 334
+  Color = clMaroon
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = True
+  Position = poScreenCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Bevel1: TBevel
+    Left = 35
+    Top = 7
+    Width = 262
+    Height = 162
+  end
+  object Label10: TLabel
+    Left = 46
+    Top = 9
+    Width = 234
+    Height = 29
+    Caption = 'OS Simulator ver.1.2'
+    Font.Charset = GREEK_CHARSET
+    Font.Color = clBlue
+    Font.Height = -24
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+    Transparent = True
+  end
+  object Label11: TLabel
+    Left = 68
+    Top = 50
+    Width = 191
+    Height = 22
+    Caption = 'Program created by:'
+    Font.Charset = GREEK_CHARSET
+    Font.Color = clBlue
+    Font.Height = -19
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+    Transparent = True
+  end
+  object Label16: TLabel
+    Left = 38
+    Top = 91
+    Width = 251
+    Height = 39
+    Caption = 'Renegade and EmP'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clRed
+    Font.Height = -29
+    Font.Name = 'Matura MT Script Capitals'
+    Font.Style = [fsBold]
+    ParentFont = False
+    Transparent = True
+  end
+  object Label18: TLabel
+    Left = 95
+    Top = 142
+    Width = 125
+    Height = 22
+    Caption = 'January 1998'
+    Font.Charset = GREEK_CHARSET
+    Font.Color = clBlue
+    Font.Height = -19
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+    Transparent = True
+  end
+  object Button1: TButton
+    Left = 129
+    Top = 182
+    Width = 75
+    Height = 25
+    Caption = 'OK'
+    TabOrder = 0
+    OnClick = BitBtn1Click
+  end
+end

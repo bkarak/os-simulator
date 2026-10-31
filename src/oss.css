@@ -1,0 +1,586 @@
+/*
+ * OSS on a 640x480 Windows 95 desktop. Every control on the four forms sits at the Left/Top/
+ * Width/Height its Delphi form file gave it (oss.js reads them from FORMS), so this sheet only
+ * has to say what a 1998 control looked like: grey faces, two-pixel bevels, MS Sans Serif 8pt.
+ */
+:root {
+  --face: #c0c0c0;
+  --light: #ffffff;
+  --mid: #dfdfdf;
+  --shadow: #808080;
+  --dark: #0a0a0a;
+  --title: #000080;
+  --title-off: #808080;
+  --desk: #008080;
+  --ui: "MS Sans Serif", "Microsoft Sans Serif", Tahoma, Geneva, Verdana, sans-serif;
+  --sys: "System", "MS Sans Serif", "Microsoft Sans Serif", Tahoma, Verdana, sans-serif;
+  --term: "Terminal", "Fixedsys", "Lucida Console", "Courier New", monospace;
+}
+
+html, body {
+  margin: 0;
+  background: #000;
+}
+
+/* The frame the desktop is scaled into: the whole viewport in embed.html, a box in index.html. */
+.oss-stage {
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+
+.oss-desktop {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 640px;
+  height: 480px;
+  background: var(--desk);
+  transform-origin: 0 0;
+  font: 11px/1.25 var(--ui);
+  color: #000;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.oss-desktop * {
+  box-sizing: border-box;
+}
+
+/* ------------------------------------------------------------------------------- windows */
+
+.win {
+  position: absolute;
+  background: var(--face);
+  padding: 3px;
+  box-shadow: inset -1px -1px var(--dark), inset 1px 1px var(--mid), inset -2px -2px var(--shadow), inset 2px 2px var(--light);
+}
+
+.win[hidden] {
+  display: none;
+}
+
+.win .caption {
+  height: 16px;
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 2px 0 3px;
+  background: var(--title-off);
+  color: #c0c0c0;
+  font-weight: bold;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.win.active .caption {
+  background: var(--title);
+  color: #fff;
+}
+
+.win .caption span {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.win .caption .close {
+  width: 13px;
+  height: 11px;
+  padding: 0;
+  margin-left: 2px;
+  font: bold 9px/9px var(--ui);
+  min-width: 0;
+}
+
+.menubar {
+  height: 19px;
+  display: flex;
+  align-items: stretch;
+  padding: 0 0 1px;
+  position: relative;
+}
+
+.menubar > .menu-top {
+  padding: 2px 6px 0;
+  cursor: default;
+}
+
+.menubar > .menu-top.open {
+  box-shadow: inset 1px 1px var(--shadow), inset -1px -1px var(--light);
+}
+
+.menu-drop {
+  position: absolute;
+  z-index: 50;
+  min-width: 120px;
+  background: var(--face);
+  padding: 3px;
+  box-shadow: inset -1px -1px var(--dark), inset 1px 1px var(--mid), inset -2px -2px var(--shadow), inset 2px 2px var(--light);
+}
+
+.menu-drop .item {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 2px 8px 2px 18px;
+  white-space: nowrap;
+  cursor: default;
+}
+
+.menu-drop .item:hover:not(.disabled) {
+  background: var(--title);
+  color: #fff;
+}
+
+.menu-drop .item.disabled {
+  color: var(--shadow);
+  text-shadow: 1px 1px var(--light);
+}
+
+.menu-drop .sep {
+  margin: 3px 1px;
+  border-top: 1px solid var(--shadow);
+  border-bottom: 1px solid var(--light);
+}
+
+.client {
+  position: relative;
+}
+
+.client > * {
+  position: absolute;
+}
+
+/* ------------------------------------------------------------------------------ controls */
+
+.oss-desktop button {
+  font: 11px var(--ui);
+  color: #000;
+  background: var(--face);
+  border: 0;
+  padding: 0 4px;
+  box-shadow: inset -1px -1px var(--dark), inset 1px 1px var(--light), inset -2px -2px var(--shadow), inset 2px 2px var(--mid);
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: default;
+}
+
+.oss-desktop button:active:not(:disabled) {
+  box-shadow: inset 1px 1px var(--dark), inset -1px -1px var(--light), inset 2px 2px var(--shadow), inset -2px -2px var(--mid);
+  padding: 2px 3px 0 5px;
+}
+
+.oss-desktop button:focus-visible,
+.oss-desktop button:focus {
+  outline: 1px dotted #000;
+  outline-offset: -5px;
+}
+
+.oss-desktop button:disabled {
+  color: var(--shadow);
+  text-shadow: 1px 1px var(--light);
+}
+
+.oss-desktop u {
+  text-decoration: underline;
+}
+
+.field,
+.oss-desktop input[type="text"],
+.oss-desktop textarea {
+  font: 11px var(--ui);
+  color: #000;
+  background: #fff;
+  border: 0;
+  margin: 0;
+  padding: 3px 4px;
+  box-shadow: inset -1px -1px var(--light), inset 1px 1px var(--shadow), inset -2px -2px var(--mid), inset 2px 2px var(--dark);
+  outline: none;
+  user-select: text;
+  -webkit-user-select: text;
+  border-radius: 0;
+}
+
+.oss-desktop input[readonly] {
+  cursor: default;
+}
+
+.oss-desktop textarea,
+.memo {
+  resize: none;
+  white-space: pre-wrap;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 2px 4px;
+}
+
+.memo {
+  background: #fff;
+  box-shadow: inset -1px -1px var(--light), inset 1px 1px var(--shadow), inset -2px -2px var(--mid), inset 2px 2px var(--dark);
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+.memo div {
+  min-height: 1.25em;
+  overflow-wrap: anywhere;
+}
+
+/* Windows 95 scroll bars, near enough: grey buttons on a dithered track. */
+.memo::-webkit-scrollbar,
+.oss-desktop textarea::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+.memo::-webkit-scrollbar-track,
+.oss-desktop textarea::-webkit-scrollbar-track {
+  background-color: #dfdfdf;
+  background-image: repeating-conic-gradient(#c0c0c0 0 25%, #fff 0 50%);
+  background-size: 2px 2px;
+}
+
+.memo::-webkit-scrollbar-thumb,
+.oss-desktop textarea::-webkit-scrollbar-thumb {
+  background: var(--face);
+  box-shadow: inset -1px -1px var(--dark), inset 1px 1px var(--mid), inset -2px -2px var(--shadow), inset 2px 2px var(--light);
+}
+
+.memo::-webkit-scrollbar-button:single-button,
+.oss-desktop textarea::-webkit-scrollbar-button:single-button {
+  display: block;
+  height: 16px;
+  width: 16px;
+  background-color: var(--face);
+  box-shadow: inset -1px -1px var(--dark), inset 1px 1px var(--mid), inset -2px -2px var(--shadow), inset 2px 2px var(--light);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.memo::-webkit-scrollbar-button:single-button:vertical:decrement,
+.oss-desktop textarea::-webkit-scrollbar-button:single-button:vertical:decrement {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='4'%3E%3Cpath d='M3 0h1v1h1v1h1v1h1v1H0V3h1V2h1V1h1z'/%3E%3C/svg%3E");
+}
+
+.memo::-webkit-scrollbar-button:single-button:vertical:increment,
+.oss-desktop textarea::-webkit-scrollbar-button:single-button:vertical:increment {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='4'%3E%3Cpath d='M0 0h7v1H6v1H5v1H4v1H3V3H2V2H1V1H0z'/%3E%3C/svg%3E");
+}
+
+.memo::-webkit-scrollbar-corner,
+.oss-desktop textarea::-webkit-scrollbar-corner {
+  background: var(--face);
+}
+
+.label {
+  white-space: nowrap;
+}
+
+.label.sys {
+  font: bold 12px var(--sys);
+  text-decoration: underline;
+}
+
+.label.plain {
+  font: 13px var(--sys);
+}
+
+.label.term {
+  font: 15px var(--term);
+}
+
+/* TBevel: bsLowered draws a sunken rectangle, bsRaised a raised one. */
+.bevel {
+  border: 1px solid;
+  border-color: var(--shadow) var(--light) var(--light) var(--shadow);
+  pointer-events: none;
+}
+
+.bevel.raised {
+  border-color: var(--light) var(--shadow) var(--shadow) var(--light);
+}
+
+.groupbox {
+  border: 1px solid;
+  border-color: var(--shadow) var(--light) var(--light) var(--shadow);
+  box-shadow: inset 1px 1px var(--light), 1px 1px var(--shadow) inset;
+}
+
+.groupbox legend,
+.groupbox .legend {
+  position: absolute;
+  top: -8px;
+  left: 6px;
+  padding: 0 2px;
+  background: var(--face);
+}
+
+.groupbox label {
+  position: absolute;
+  left: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.groupbox input[type="radio"] {
+  margin: 0;
+  width: 12px;
+  height: 12px;
+  accent-color: #000;
+}
+
+.progress {
+  background: var(--face);
+  box-shadow: inset -1px -1px var(--light), inset 1px 1px var(--shadow);
+  padding: 2px;
+}
+
+.progress i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: repeating-linear-gradient(90deg, var(--title) 0 8px, transparent 8px 10px);
+}
+
+/* ----------------------------------------------------------------------------- the about box */
+
+.about .client {
+  background: #800000;
+}
+
+.about .label {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  color: #0000ff;
+}
+
+.about .script {
+  font-family: "Matura MT Script Capitals", "Brush Script MT", "Segoe Script", "Comic Sans MS", cursive;
+  color: #ff0000;
+}
+
+.about .bevel {
+  border-color: var(--shadow) var(--light) var(--light) var(--shadow);
+}
+
+/* ------------------------------------------------------------------------- message boxes */
+
+.modal-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+}
+
+.msgbox .client {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px 12px 10px;
+}
+
+.msgbox .client > * {
+  position: static;
+}
+
+.msgbox .body {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  white-space: pre-wrap;
+  max-width: 420px;
+}
+
+.msgbox .buttons {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.msgbox .buttons button {
+  width: 75px;
+  height: 23px;
+}
+
+/* ---------------------------------------------------------------------- open / save dialogs */
+
+.filedlg .client > * {
+  position: absolute;
+}
+
+.filedlg .list {
+  background: #fff;
+  overflow-y: auto;
+  padding: 2px;
+  box-shadow: inset -1px -1px var(--light), inset 1px 1px var(--shadow), inset -2px -2px var(--mid), inset 2px 2px var(--dark);
+}
+
+.filedlg .list div {
+  padding: 0 3px;
+  white-space: nowrap;
+  cursor: default;
+}
+
+.filedlg .list div::before {
+  content: "\1F5CE\FE0E ";
+  font-size: 10px;
+}
+
+.filedlg .list div.sel {
+  background: var(--title);
+  color: #fff;
+}
+
+/* ----------------------------------------------------------------------------------- help */
+
+.help .client {
+  display: flex;
+  flex-direction: column;
+}
+
+.help .client > * {
+  position: static;
+}
+
+.help .bar {
+  display: flex;
+  gap: 2px;
+  padding: 2px 0 4px;
+}
+
+.help .bar button {
+  height: 22px;
+  padding: 0 8px;
+}
+
+.help .helptext {
+  flex: 1;
+  overflow-y: auto;
+  background: #fff;
+  padding: 8px 12px;
+  font: 12px/1.4 Arial, Helvetica, sans-serif;
+  user-select: text;
+  -webkit-user-select: text;
+  box-shadow: inset -1px -1px var(--light), inset 1px 1px var(--shadow), inset -2px -2px var(--mid), inset 2px 2px var(--dark);
+}
+
+.help .helptext h1 {
+  font-size: 15px;
+  margin: 0 0 8px;
+  color: #000080;
+}
+
+.help .helptext p {
+  margin: 0 0 8px;
+}
+
+.help .helptext a {
+  color: #008000;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.help .helptext dl {
+  margin: 0 0 8px;
+}
+
+.help .helptext dt {
+  font-weight: bold;
+  margin-top: 6px;
+}
+
+.help .helptext dd {
+  margin: 0 0 0 22px;
+}
+
+.help .helptext code {
+  font-family: "Courier New", monospace;
+}
+
+.help .helptext ul {
+  margin: 0 0 8px;
+  padding-left: 20px;
+}
+
+/* ----------------------------------------------------------------------- shut down screen */
+
+.shutdown {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+  background: #000;
+  color: #ff8c00;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  font: bold 26px/1.3 Arial, Helvetica, sans-serif;
+  text-align: center;
+  cursor: pointer;
+}
+
+.shutdown[hidden],
+.oss-desktop [hidden] {
+  display: none !important;
+}
+
+.shutdown small {
+  font: 12px var(--ui);
+  color: #a0a0a0;
+}
+
+/* ------------------------------------------------------------------ the two page shells */
+
+body.embed {
+  overflow: hidden;
+}
+
+.embed-stage {
+  width: 100vw;
+  height: 100vh;
+}
+
+body.page {
+  background: #1b1b1b;
+  color: #e6e6e6;
+  font: 15px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  padding: 0 16px 32px;
+}
+
+.page-head,
+.page-foot {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.page-head h1 {
+  font-size: 1.5rem;
+  margin: 24px 0 6px;
+}
+
+.page-head p,
+.page-foot p {
+  margin: 0 0 16px;
+  color: #c8c8c8;
+}
+
+.page a {
+  color: #7fb8ff;
+}
+
+.page code {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 0.9em;
+  color: #fff;
+}
+
+.page-stage {
+  max-width: 960px;
+  margin: 0 auto 16px;
+  aspect-ratio: 4 / 3;
+}

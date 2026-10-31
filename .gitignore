@@ -1,0 +1,13 @@
+# The 1998 files: Os_simulator.exe, OSS_HELP.HLP and the rest are served by the site as
+# https://bkarak.wizhut.tech/programs/oss/oss.zip; unzip it into original/ for tools/re/.
+original/
+
+# Analysis scratch written by tools/re/ and Ghidra's project directory
+out/
+ghidra-project/
+
+venv/
+__pycache__/
+node_modules/
+.claude/
+.DS_Store

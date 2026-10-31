@@ -1,0 +1,159 @@
+object editor: Teditor
+  Left = 27
+  Top = 37
+  HelpContext = 15
+  BorderIcons = [biMinimize]
+  BorderStyle = bsToolWindow
+  Caption = 'Batch Editor'
+  ClientHeight = 344
+  ClientWidth = 578
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  Menu = MainMenu1
+  Position = poScreenCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Memo1: TMemo
+    Left = 8
+    Top = 8
+    Width = 449
+    Height = 329
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Terminal Greek 737 (437G)'
+    Font.Style = []
+    MaxLength = 255
+    ParentFont = False
+    ScrollBars = ssBoth
+    TabOrder = 0
+  end
+  object execute: TBitBtn
+    Left = 464
+    Top = 16
+    Width = 105
+    Height = 25
+    Caption = 'E&xecute as one'
+    TabOrder = 1
+    OnClick = executeClick
+  end
+  object save: TBitBtn
+    Left = 464
+    Top = 136
+    Width = 105
+    Height = 25
+    Caption = 'S&ave As...'
+    TabOrder = 4
+    OnClick = saveClick
+  end
+  object help: TBitBtn
+    Left = 464
+    Top = 216
+    Width = 105
+    Height = 25
+    Caption = '&Help'
+    TabOrder = 6
+    OnClick = helpClick
+  end
+  object Back: TBitBtn
+    Left = 464
+    Top = 256
+    Width = 105
+    Height = 25
+    Caption = '&Back'
+    TabOrder = 7
+    OnClick = BackClick
+  end
+  object clear: TBitBtn
+    Left = 464
+    Top = 176
+    Width = 105
+    Height = 25
+    Caption = '&Clear'
+    TabOrder = 5
+    OnClick = clearClick
+  end
+  object Exit: TBitBtn
+    Left = 464
+    Top = 296
+    Width = 105
+    Height = 25
+    Caption = '&Exit'
+    TabOrder = 8
+    OnClick = ExitClick
+  end
+  object open: TBitBtn
+    Left = 464
+    Top = 96
+    Width = 105
+    Height = 25
+    Caption = '&Open'
+    TabOrder = 3
+    OnClick = openClick
+  end
+  object ExecSepBtn: TBitBtn
+    Left = 464
+    Top = 56
+    Width = 105
+    Height = 25
+    Caption = 'Execute Seperately'
+    TabOrder = 2
+    OnClick = ExecSepBtnClick
+  end
+  object SaveDialog1: TSaveDialog
+    DefaultExt = 'bch'
+    Filter = 'Batch Files(*.bch)|*.bch'
+    InitialDir = '.'
+    Options = [ofHideReadOnly, ofPathMustExist]
+    Left = 360
+  end
+  object MainMenu1: TMainMenu
+    Left = 424
+    object File1: TMenuItem
+      Caption = '&File'
+      object new: TMenuItem
+        Caption = '&New'
+        ShortCut = 112
+        OnClick = newClick
+      end
+      object Open2: TMenuItem
+        Caption = '&Open'
+        OnClick = openClick
+      end
+      object SaveAs1: TMenuItem
+        Caption = 'S&ave As..'
+        OnClick = saveClick
+      end
+      object save2: TMenuItem
+        Caption = '&Save'
+        ShortCut = 113
+      end
+      object Exit1: TMenuItem
+        Caption = '&Exit'
+        OnClick = Exit1Click
+      end
+    end
+    object Help1: TMenuItem
+      Caption = '&Help'
+      object Contents1: TMenuItem
+        Caption = 'Contents'
+        OnClick = helpClick
+      end
+      object Commands1: TMenuItem
+        Caption = 'Comma&nds'
+        OnClick = Commands1Click
+      end
+      object About1: TMenuItem
+        Caption = 'A&bout'
+      end
+    end
+  end
+  object OpenDialog1: TOpenDialog
+    Filter = 'Batch Files(*.bch)|*.bch'
+    InitialDir = '.'
+    Left = 392
+  end
+end

@@ -1,0 +1,40 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>OSS, the Operating System Simulator — Vassilios Karakoidas</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="OSS, a 1998 university operating-systems simulator written in Delphi, reverse-engineered from its executable and running again in the browser: FIFO, round robin and shortest job first over a simulated screen, memory, disk and printer.">
+<link rel="canonical" href="https://bkarak.wizhut.tech/software/oss">
+<link rel="stylesheet" href="oss.css">
+
+<!--
+  The simulator on a page of its own. embed.html is the same desktop without this text, for the
+  frame on /software/oss.
+-->
+
+<body class="page">
+<div class="page-head">
+  <h1>OSS, the Operating System Simulator</h1>
+  <p>
+    A scheduler simulator written by six students for Operating Systems I at the University of
+    Piraeus in January 1998, rebuilt in JavaScript from its Windows executable.
+    <a href="/software/oss">What this is, and where it came from</a>
+  </p>
+</div>
+
+<div class="oss-stage page-stage" data-max-scale="1.5"></div>
+
+<div class="page-foot">
+  <p>
+    Log in with any name and pick a scheduler. Then try <code>scr hello</code>,
+    <code>prn a long job</code> and <code>cmp /abc /abd</code> one after the other, and watch
+    the Current Task field: FIFO runs them in order, round robin takes turns, shortest job first
+    lets the short ones through. <code>dirtasks</code> lists the task table and
+    <code>edit example.bch</code> opens the batch file the program shipped with. Help has the
+    team's own manual. The batch files you save stay in this browser.
+  </p>
+</div>
+
+<script src="engine.js"></script>
+<script src="help.js"></script>
+<script src="oss.js"></script>
+</body>
