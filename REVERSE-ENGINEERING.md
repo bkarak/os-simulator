@@ -271,7 +271,7 @@ round-robin hang and Ctrl+X. It also corrected me twice:
   from Virtual Hard Drive". The batch test is `Pos('.bch', s) = Length(s) - 3`, and `Pos`
   returns 0 when the substring is not there. For any three-letter string, `0 = 3 - 3`. Every
   unknown three-letter command was a batch file, and every unknown six-letter one a batch run
-  with `/s`. I had read that comparison three times without seeing it.
+  with `/s`. I had read past that comparison while writing the parser.
 - I expected `example.bch /s` to raise the overwrite dialog, because the listing clearly queues
   its first line twice (`std 5` twice, the second finding address 5 occupied). It ran cleanly.
   The reason is a second bug: when the batch task finishes, `execute_task` writes the batch's
